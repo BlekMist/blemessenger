@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BleMessenger — скачать мессенджер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f5ff;--bg2:#e4eaff;--tx:#0d1330;--mut:#55608a;--card:#fff;--bd:#d3dbf5;--a:#2f5bff;--b:#12a8d8;--on:#fff;--out:#e9edff;--in:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#080c1d;--bg2:#10173a;--tx:#eef1ff;--mut:#97a2d0;--card:#111836;--bd:#232d5c;--a:#5b82ff;--b:#46d1ff;--out:#1a2656;--in:#161e45;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#080c1d;--bg2:#10173a;--tx:#eef1ff;--mut:#97a2d0;--card:#111836;--bd:#232d5c;--a:#5b82ff;--b:#46d1ff;--out:#1a2656;--in:#161e45;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.6 Manrope,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+h1,h2,h3{font-family:Unbounded,Manrope,system-ui,sans-serif;line-height:1.15;margin:0 0 .6em;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,6vw,3.6rem);font-weight:700}
+h2{font-size:clamp(1.5rem,3.6vw,2.2rem);font-weight:700}
+h3{font-size:1.1rem;font-weight:500}
+p{margin:0 0 1em;color:var(--mut);max-width:62ch}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--b);outline-offset:3px;border-radius:8px}
+.glow{position:fixed;z-index:-1;border-radius:50%;filter:blur(90px);opacity:.28;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
+.g1{width:46vw;height:46vw;background:var(--a);top:-12vw;left:-10vw}
+.g2{width:38vw;height:38vw;background:var(--b);bottom:-10vw;right:-8vw;animation-delay:-8s}
+@keyframes drift{to{transform:translate(6vw,5vw) scale(1.15)}}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+.bar{max-width:1080px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font:700 1.05rem Unbounded,sans-serif;text-decoration:none;margin-right:auto}
+.mark{width:36px;height:36px;border-radius:12px 12px 12px 4px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center;color:#fff;font-size:.8rem}
+nav{display:flex;gap:4px}
+nav button,.ic{font:500 .95rem Manrope,sans-serif;background:none;border:0;color:var(--mut);padding:9px 14px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+nav button:hover,.ic:hover{background:var(--bg2);color:var(--tx)}
+nav button[aria-current="page"]{background:var(--a);color:var(--on)}
+.ic{padding:9px 12px;font-size:1.1rem;line-height:1}
+#menu{display:none}
+main{max-width:1080px;margin:auto;padding:36px 20px 70px}
+.page{display:none}
+.page.on{display:block;animation:in .35s ease both}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;min-height:62vh}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 1rem Manrope,sans-serif;text-decoration:none;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:13px 22px;border-radius:14px;cursor:pointer;transition:transform .15s,box-shadow .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--a);box-shadow:0 10px 30px -12px var(--a)}
+.btn.pri{background:linear-gradient(135deg,var(--a),var(--b));color:#fff;border:0}
+.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.phone{background:var(--card);border:1px solid var(--bd);border-radius:32px;padding:18px;box-shadow:0 30px 70px -30px var(--a);max-width:360px;margin-left:auto;width:100%}
+.ph-top{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--bd);font-weight:700}
+.dot{width:9px;height:9px;border-radius:50%;background:#2fd37a;box-shadow:0 0 0 0 #2fd37a88;animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px #2fd37a00}}
+.chat{display:flex;flex-direction:column;gap:10px;padding-top:14px;min-height:250px}
+.m{max-width:82%;padding:10px 14px;font-size:.93rem;line-height:1.4;opacity:0;transform:translateY(8px) scale(.96);animation:pop .4s ease forwards}
+.m.i{background:var(--in);border:1px solid var(--bd);border-radius:16px 16px 16px 4px;align-self:flex-start}
+.m.o{background:var(--out);border-radius:16px 16px 4px 16px;align-self:flex-end}
+.typing{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;background:var(--in);border:1px solid var(--bd);border-radius:16px 16px 16px 4px;opacity:0;animation:pop .3s ease forwards}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--mut);animation:bl 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{transform:translateY(-4px);opacity:.4}}
+@keyframes pop{to{opacity:1;transform:none}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:24px;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:var(--a)}
+.card .em{font-size:1.9rem;display:block;margin-bottom:8px}
+.card p{margin:0;font-size:.95rem}
+.os{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:26px 0}
+.os .card{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
+.os .card .em{font-size:3rem;margin:0}
+.os .btn{margin-top:10px;width:100%;justify-content:center}
+.os .card.rec{border-color:var(--a);box-shadow:0 20px 50px -28px var(--a)}
+.tag{position:absolute;top:12px;right:12px;font-size:.75rem;font-weight:700;background:var(--a);color:#fff;padding:3px 10px;border-radius:999px}
+.tabs{display:inline-flex;gap:4px;background:var(--bg2);padding:5px;border-radius:999px;margin:14px 0 22px}
+.tabs button{font:700 .92rem Manrope,sans-serif;border:0;background:none;color:var(--mut);padding:9px 18px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--card);color:var(--tx);box-shadow:0 2px 10px -4px #0006}
+.panel{display:none}.panel.on{display:block;animation:in .3s ease both}
+ol.steps{list-style:none;padding:0;margin:0;counter-reset:s;display:grid;gap:12px}
+ol.steps li{counter-increment:s;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px 18px 16px 62px;position:relative;color:var(--mut)}
+ol.steps li::before{content:counter(s);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:10px;background:var(--a);color:#fff;display:grid;place-items:center;font-weight:700}
+ol.steps b{color:var(--tx)}
+.code{display:flex;align-items:center;gap:10px;margin-top:10px;background:var(--bg2);border-radius:12px;padding:8px 8px 8px 14px;font:500 .88rem ui-monospace,Menlo,Consolas,monospace;color:var(--tx)}
+.code code{flex:1;overflow-x:auto;white-space:nowrap}
+.code button{font:700 .8rem Manrope,sans-serif;border:0;background:var(--a);color:#fff;border-radius:8px;padding:7px 12px;cursor:pointer}
+details{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";transition:transform .25s;font-size:1.3rem;line-height:1}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:10px 0 0}
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:26px}
+.pers{display:flex;gap:16px;align-items:center}
+.av{width:64px;height:64px;border-radius:20px 20px 20px 6px;background:linear-gradient(135deg,var(--a),var(--b));color:#fff;display:grid;place-items:center;font:700 1.5rem Unbounded,sans-serif;flex:none}
+.pers h3{margin:0}.pers p{margin:2px 0 0;font-size:.9rem}
+.soc{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.soc .btn{padding:10px 18px;border-radius:999px;font-size:.92rem}
+footer{border-top:1px solid var(--bd);text-align:center;padding:28px 20px;color:var(--mut);font-size:.9rem}
+footer .soc{justify-content:center}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--tx);color:var(--bg);padding:12px 20px;border-radius:14px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;z-index:40;max-width:90vw;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.phone{animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px) rotate(.6deg)}}
+.mark,.btn.pri{background-size:200% 200%;animation:shift 6s ease infinite}
+@keyframes shift{50%{background-position:100% 100%}}
+.btn.pri{position:relative;overflow:hidden}
+.btn.pri::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,#fff6,transparent);transform:skewX(-20deg);animation:shine 4s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+.w{display:inline-block;opacity:0;transform:translateY(.6em);animation:pop .6s ease forwards}
+.rv{opacity:0}
+.rv.vis{opacity:1;animation:rise .6s ease var(--d,0s) backwards}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.96)}}
+.card{position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--a) 20%,transparent),transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover::before{opacity:1}
+.bub{position:fixed;bottom:-80px;background:var(--b);opacity:.1;border-radius:50% 50% 50% 10px;z-index:-1;pointer-events:none;animation:up2 linear infinite}
+@keyframes up2{to{transform:translateY(-120vh) rotate(30deg)}}
+.cf{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:50;animation:cf .9s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--x),var(--y)) rotate(540deg);opacity:0}}
+.lead{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;padding:32px;border-radius:30px;margin:26px 0 8px;background:linear-gradient(135deg,color-mix(in srgb,var(--a) 14%,var(--card)),var(--card))}
+.ring{width:132px;height:132px;border-radius:50%;padding:5px;background:conic-gradient(var(--a),var(--b),#b06bff,var(--a));animation:spin 6s linear infinite}
+.ring>div{width:100%;height:100%;border-radius:50%;background:var(--card);display:grid;place-items:center;font:700 2.6rem Unbounded,sans-serif;animation:spin 6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.crown{display:inline-block;background:var(--a);color:#fff;font-weight:700;font-size:.85rem;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+.fld{width:100%;font:500 1rem Manrope,sans-serif;background:var(--bg2);color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+textarea.fld{min-height:110px;resize:vertical}
+#stars{display:flex;gap:4px;margin-bottom:12px}
+#stars button{font-size:1.8rem;line-height:1;background:none;border:0;color:var(--bd);cursor:pointer;padding:2px 4px;transition:transform .15s,color .15s}
+#stars button:hover{transform:scale(1.25) rotate(-8deg)}
+#stars button.on{color:#f5b301;animation:pop2 .3s ease}
+@keyframes pop2{50%{transform:scale(1.35)}}
+.st{color:#f5b301;letter-spacing:2px;display:block;margin-bottom:6px}
+.rev h3{margin:0 0 4px}
+#rlist{display:grid;gap:14px;margin-top:14px;color:var(--mut)}
+#avg{font-weight:700;margin-top:6px}
+.cnt{color:var(--mut);font-size:.88rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:26px}
+.card.form:hover{transform:none}
+@media (max-width:560px){.lead{grid-template-columns:1fr;text-align:center;justify-items:center}}
+@media (max-width:760px){
+.hero{grid-template-columns:1fr;min-height:0}.phone{margin:0 auto}
+}
+@media (max-width:940px){
+#menu{display:block}
+nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--bd);padding:10px 16px}
+nav.open{display:flex}nav button{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition:none!important}.m,.typing{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+<header><div class="bar">
+<a class="logo" href="#home" data-go="home"><span class="mark">Ble</span>BleMessenger</a>
+<nav id="nav" aria-label="Разделы">
+<button data-go="home">Главная</button>
+<button data-go="download">Скачать мессенджер</button>
+<button data-go="guide">Инструкция</button>
+<button data-go="reviews">Отзывы</button>
+<button data-go="team">Создатели</button>
+</nav>
+<button class="ic" id="theme" aria-label="Сменить тему">🌓</button>
+<button class="ic" id="menu" aria-label="Открыть меню">☰</button>
+</div></header>
+
+<main>
+<section class="page" id="home">
+<div class="hero">
+<div>
+<h1>Общайтесь легко, быстро и по-своему</h1>
+<p>BleMessenger — мессенджер, который мы делаем сами и развиваем вместе с вами. Скачайте его на Windows, Linux или Android за пару минут.</p>
+<div class="btns">
+<button class="btn pri" data-go="download">Скачать мессенджер</button>
+<a class="btn" href="https://t.me/BleMessenger" target="_blank" rel="noopener">Наш Telegram-канал</a>
+</div>
+</div>
+<div class="phone" aria-hidden="true">
+<div class="ph-top"><span class="mark" style="width:30px;height:30px;font-size:.65rem">Ble</span>BleMessenger<span class="dot" style="margin-left:auto"></span></div>
+<div class="chat" id="chat"></div>
+</div>
+</div>
+<div class="grid">
+<div class="card"><span class="em">⚡</span><h3>Быстрый</h3><p>Сообщения приходят мгновенно, а приложение запускается без ожидания.</p></div>
+<div class="card"><span class="em">🖥️</span><h3>Везде с вами</h3><p>Версии для Windows, Linux и Android — переписка всегда под рукой.</p></div>
+<div class="card"><span class="em">🎨</span><h3>Приятный на вид</h3><p>Светлая и тёмная темы, плавные анимации и ничего лишнего.</p></div>
+<div class="card"><span class="em">🤝</span><h3>Растёт вместе с вами</h3><p>Новости и обновления выходят в Telegram и на YouTube — предлагайте идеи.</p></div>
+</div>
+</section>
+
+<section class="page" id="download">
+<h1>Скачать мессенджер</h1>
+<p>Выберите свою систему. Мы подсветили ту, что подходит вашему устройству.</p>
+<p id="tot" hidden>Всего скачиваний: <b></b></p>
+<div class="os">
+<div class="card" data-os="windows"><span class="em">🪟</span><h3>Windows</h3><p>Установщик для Windows 10 и 11</p><button class="btn pri" data-dl="windows">Скачать для Windows</button><small class="cnt" data-cnt="windows"></small></div>
+<div class="card" data-os="linux"><span class="em">🐧</span><h3>Linux</h3><p>Сборка для популярных дистрибутивов</p><button class="btn pri" data-dl="linux">Скачать для Linux</button><small class="cnt" data-cnt="linux"></small></div>
+<div class="card" data-os="android"><span class="em">🤖</span><h3>Android</h3><p>APK-файл для телефона и планшета</p><button class="btn pri" data-dl="apk">Скачать APK</button><small class="cnt" data-cnt="apk"></small></div>
+</div>
+<p>Не знаете, что делать после скачивания? <a href="#guide" data-go="guide" style="color:var(--a);font-weight:700">Откройте инструкцию</a>.</p>
+</section>
+
+<section class="page" id="guide">
+<h1>Как скачать и установить</h1>
+<p>Выберите свою систему — шаги покажутся ниже.</p>
+<div class="tabs" role="tablist">
+<button role="tab" data-t="windows" aria-selected="true">Windows</button>
+<button role="tab" data-t="linux" aria-selected="false">Linux</button>
+<button role="tab" data-t="android" aria-selected="false">Android</button>
+</div>
+<div class="panel on" id="p-windows"><ol class="steps">
+<li><b>Скачайте файл.</b> На вкладке «Скачать мессенджер» нажмите «Скачать для Windows».</li>
+<li><b>Запустите установщик.</b> Откройте файл из папки «Загрузки». Если Windows покажет предупреждение, нажмите «Подробнее» и «Выполнить в любом случае».</li>
+<li><b>Следуйте подсказкам.</b> Выберите папку установки и дождитесь завершения.</li>
+<li><b>Войдите в BleMessenger.</b> Ярлык появится на рабочем столе.</li>
+</ol></div>
+<div class="panel" id="p-linux"><ol class="steps">
+<li><b>Скачайте файл</b> кнопкой «Скачать для Linux» и откройте терминал в папке с ним.</li>
+<li><b>Разрешите запуск файла.</b> Имя файла может отличаться, подставьте своё.
+<div class="code"><code>chmod +x BleMessenger*</code><button data-copy="chmod +x BleMessenger*">Копировать</button></div></li>
+<li><b>Запустите мессенджер.</b>
+<div class="code"><code>./BleMessenger*</code><button data-copy="./BleMessenger*">Копировать</button></div></li>
+</ol></div>
+<div class="panel" id="p-android"><ol class="steps">
+<li><b>Скачайте APK</b> кнопкой «Скачать APK» прямо с телефона.</li>
+<li><b>Разрешите установку.</b> В настройках включите «Установка из неизвестных источников» для вашего браузера.</li>
+<li><b>Откройте файл.</b> Нажмите на скачанный APK в уведомлении или в папке «Загрузки» и выберите «Установить».</li>
+<li><b>Готово.</b> Запустите BleMessenger с главного экрана.</li>
+</ol></div>
+<h2 style="margin-top:40px">Частые вопросы</h2>
+<details><summary>Почему система предупреждает при установке?</summary><p>Приложение распространяется напрямую, а не через магазин, поэтому система просит подтвердить установку. Скачивайте файлы только с этого сайта и из нашего Telegram-канала.</p></details>
+<details><summary>Как обновить мессенджер?</summary><p>Скачайте новую версию на этой странице и установите поверх старой. О новых версиях мы пишем в Telegram.</p></details>
+<details><summary>Куда сообщить об ошибке или предложить идею?</summary><p>Напишите в наш Telegram-канал или оставьте комментарий на YouTube.</p></details>
+</section>
+
+<section class="page" id="reviews">
+<h1>Отзывы и предложения</h1>
+<p>Расскажите, как вам BleMessenger, и подскажите, что в нём улучшить.</p>
+<div class="two">
+<div class="card form"><h3>Оставить отзыв</h3>
+<input class="fld" id="rname" maxlength="30" placeholder="Ваше имя (можно пропустить)" aria-label="Ваше имя">
+<div id="stars" role="group" aria-label="Оценка"><button aria-label="1 звезда">★</button><button aria-label="2 звезды">★</button><button aria-label="3 звезды">★</button><button aria-label="4 звезды">★</button><button aria-label="5 звёзд">★</button></div>
+<textarea class="fld" id="rtext" maxlength="400" placeholder="Что понравилось, а что нет?" aria-label="Текст отзыва"></textarea>
+<button class="btn pri" id="rsend">Отправить отзыв</button></div>
+<div class="card form"><h3>Предложить идею</h3>
+<p>Напишите, какой функции не хватает в мессенджере.</p>
+<textarea class="fld" id="itext" maxlength="600" placeholder="Хочу, чтобы в BleMessenger появилось…" aria-label="Ваша идея"></textarea>
+<button class="btn pri" id="isend">Отправить идею</button></div>
+</div>
+<h2 style="margin-top:44px">Что пишут пользователи</h2>
+<div id="avg"></div>
+<div id="rlist"></div>
+</section>
+
+<section class="page" id="team">
+<h1>Создатели и помощь в создании</h1>
+<p>BleMessenger появился благодаря людям, которые вложили в него время и идеи.</p>
+<div class="card lead"><div class="ring"><div>B</div></div><div><span class="crown">👑 Главный создатель</span><h2 style="margin:0 0 .3em">BlekMist</h2><p style="margin:0">Главный создатель BleMessenger — ведёт проект и развивает его вместе с командой.</p></div></div>
+<h2 style="margin-top:36px">Помощь в создании</h2>
+<div class="team">
+<div class="card pers"><div class="av">S</div><div><h3>Studio</h3><p>Помощь в создании мессенджера</p></div></div>
+<div class="card pers"><div class="av">G</div><div><h3>Suntsov_gera</h3><p>Помощь в создании мессенджера</p></div></div>
+</div>
+<h2 style="margin-top:44px">Следите за проектом</h2>
+<p>Новые версии, планы и закулисье — в наших соцсетях.</p>
+<div class="soc">
+<a class="btn" href="https://t.me/BleMessenger" target="_blank" rel="noopener">Telegram</a>
+<a class="btn" href="https://www.youtube.com/@BleMessenger" target="_blank" rel="noopener">YouTube</a>
+<span class="btn" aria-disabled="true">TikTok — скоро</span>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="soc">
+<a class="btn" href="https://t.me/BleMessenger" target="_blank" rel="noopener">Telegram</a>
+<a class="btn" href="https://www.youtube.com/@BleMessenger" target="_blank" rel="noopener">YouTube</a>
+<span class="btn" aria-disabled="true">TikTok — скоро</span>
+</div>
+<p style="margin:18px auto 0">© 2026 BleMessenger. Сделано BlekMist, Studio и Suntsov_gera.</p>
+</footer>
+<div id="toast" role="status"></div>
+
+<script>
+// Вставьте сюда прямые ссылки на файлы — кнопки скачивания заработают сами.
+var LINKS={windows:"",linux:"",apk:""};
+// Адрес базы Firebase Realtime Database для счётчика, отзывов и идей, например "https://имя-проекта-default-rtdb.firebaseio.com"
+var BACKEND={dbUrl:""};
+var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var PAGES=["home","download","guide","reviews","team"];
+function toast(t){var e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove("on")},2600)}
+function go(p,push){
+  if(PAGES.indexOf(p)<0)p="home";
+  $$(".page").forEach(function(s){s.classList.toggle("on",s.id===p)});
+  $$("nav button").forEach(function(b){b.dataset.go===p?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current")});
+  $("#nav").classList.remove("open");
+  if(push!==false&&location.hash.slice(1)!==p)location.hash=p;
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(p==="home")runChat();splitTitle(p);reveal(p);if(p==="reviews")loadReviews();
+  document.title=(p==="home"?"BleMessenger — скачать мессенджер":"BleMessenger — "+$("#"+p+" h1").textContent);
+}
+document.addEventListener("click",function(e){
+  var g=e.target.closest("[data-go]");
+  if(g){e.preventDefault();go(g.dataset.go)}
+  var d=e.target.closest("[data-dl]");
+  if(d){burst(e.clientX,e.clientY);var u=LINKS[d.dataset.dl];if(u){window.open(u,"_blank","noopener");countDl(d.dataset.dl)}else{toast("Файл скоро появится. Следите за новостями в Telegram")}}
+  var c=e.target.closest("[data-copy]");
+  if(c){burst(e.clientX,e.clientY);try{navigator.clipboard.writeText(c.dataset.copy).then(function(){toast("Скопировано")},function(){toast("Не удалось скопировать")})}catch(x){toast("Не удалось скопировать")}}
+  var t=e.target.closest("[data-t]");
+  if(t){$$(".tabs button").forEach(function(b){b.setAttribute("aria-selected",b===t)});$$(".panel").forEach(function(p){p.classList.toggle("on",p.id==="p-"+t.dataset.t)})}
+});
+$("#menu").addEventListener("click",function(){$("#nav").classList.toggle("open")});
+window.addEventListener("hashchange",function(){go(location.hash.slice(1),false)});
+
+// тема
+var root=document.documentElement;
+try{var st=localStorage.getItem("ble-theme");if(st)root.setAttribute("data-theme",st)}catch(e){}
+$("#theme").addEventListener("click",function(){
+  var dark=root.getAttribute("data-theme")?root.getAttribute("data-theme")==="dark":matchMedia("(prefers-color-scheme:dark)").matches;
+  var n=dark?"light":"dark";root.setAttribute("data-theme",n);
+  try{localStorage.setItem("ble-theme",n)}catch(e){}
+});
+
+// определение системы
+var ua=navigator.userAgent,os=/Android/i.test(ua)?"android":/Win/i.test(ua)?"windows":/Linux|X11/i.test(ua)?"linux":"";
+var rc=$('[data-os="'+os+'"]');
+if(rc){rc.classList.add("rec");var tg=document.createElement("span");tg.className="tag";tg.textContent="Для вашего устройства";rc.appendChild(tg);$$("#p-"+os).length&&$('[data-t="'+os+'"]').click()}
+
+// живой чат на главной
+var script=[["i","Привет! Уже поставил BleMessenger?"],["o","Да, скачал за минуту 🚀"],["i","И как тебе?"],["o","Быстро, красиво, тёмная тема — огонь"]];
+var timers=[];
+function runChat(){
+  var c=$("#chat");timers.forEach(clearTimeout);timers=[];c.innerHTML="";
+  var t=0;
+  script.forEach(function(m){
+    if(m[0]==="i"){timers.push(setTimeout(function(){var d=document.createElement("div");d.className="typing";d.innerHTML="<i></i><i></i><i></i>";c.appendChild(d);timers.push(setTimeout(function(){d.remove()},900))},t));t+=900}
+    timers.push(setTimeout(function(){var d=document.createElement("div");d.className="m "+m[0];d.textContent=m[1];c.appendChild(d)},t));t+=1100;
+  });
+}
+function splitTitle(p){var h=$("#"+p+" h1");if(!h)return;var o=h.dataset.o||h.textContent;h.dataset.o=o;h.innerHTML="";var ws=o.split(" ");ws.forEach(function(w,i){var s=document.createElement("span");s.className="w";s.textContent=w;s.style.animationDelay=(i*0.07)+"s";h.appendChild(s);if(i<ws.length-1)h.appendChild(document.createTextNode(" "))})}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("vis");io.unobserve(e.target)}})},{threshold:.1});
+function reveal(p){$$(".card, details, ol.steps li",$("#"+p)).forEach(function(el,i){el.classList.remove("vis");el.classList.add("rv");el.style.setProperty("--d",(i%4)*0.08+"s");io.observe(el)})}
+function burst(x,y){var els=[];for(var i=0;i<16;i++){var s=document.createElement("span");s.className="cf";var a=Math.random()*6.28,r=60+Math.random()*80;s.style.cssText="left:"+x+"px;top:"+y+"px;background:hsl("+(200+Math.random()*80)+" 90% 60%);--x:"+Math.cos(a)*r+"px;--y:"+(Math.sin(a)*r-30)+"px";document.body.appendChild(s);els.push(s)}setTimeout(function(){els.forEach(function(s){s.remove()})},950)}
+document.addEventListener("mousemove",function(e){var c=e.target.closest&&e.target.closest(".card");if(c){var r=c.getBoundingClientRect();c.style.setProperty("--mx",e.clientX-r.left+"px");c.style.setProperty("--my",e.clientY-r.top+"px")}});
+for(var bi=0;bi<9;bi++){var b=document.createElement("i");b.className="bub";var z=20+Math.random()*50;b.style.cssText="width:"+z+"px;height:"+z+"px;left:"+Math.random()*100+"%;animation-duration:"+(14+Math.random()*14)+"s;animation-delay:-"+Math.random()*20+"s";document.body.appendChild(b)}
+var DB=(BACKEND.dbUrl||"").replace(/\/+$/,""),rate=0;
+function api(path,opt,q){return fetch(DB+path+".json"+(q||""),opt).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
+function loadCounts(){
+  if(!DB)return;
+  api("/downloads").then(function(d){d=d||{};var sum=0;
+    $$("[data-cnt]").forEach(function(e){var n=+d[e.dataset.cnt]||0;sum+=n;e.textContent="Скачали: "+n.toLocaleString("ru-RU")});
+    var t=$("#tot");t.hidden=false;$("b",t).textContent=sum.toLocaleString("ru-RU");
+  }).catch(function(){});
+}
+function countDl(k){
+  if(!DB)return;
+  try{if(localStorage.getItem("ble-dl-"+k))return;localStorage.setItem("ble-dl-"+k,"1")}catch(e){}
+  api("/downloads/"+k,{method:"PUT",body:JSON.stringify({".sv":{increment:1}})}).then(loadCounts).catch(function(){});
+}
+function loadReviews(){
+  var box=$("#rlist");
+  if(!DB){box.textContent="Отзывы появятся здесь, когда сайт будет подключён к базе данных.";return}
+  api("/reviews",null,"?orderBy=%22ts%22&limitToLast=30").then(function(d){
+    var a=Object.keys(d||{}).map(function(k){return d[k]}).filter(function(r){return r&&r.text}).sort(function(x,y){return y.ts-x.ts});
+    box.textContent="";
+    if(!a.length){box.textContent="Пока нет отзывов. Станьте первым!";$("#avg").textContent="";return}
+    var s=0;
+    a.forEach(function(r,i){
+      var n=Math.max(1,Math.min(5,r.rating|0));s+=n;
+      var c=document.createElement("div");c.className="card rev";c.style.animation="rise .5s ease "+(i*0.06)+"s backwards";
+      var h=document.createElement("h3");h.textContent=r.name||"Аноним";
+      var st=document.createElement("span");st.className="st";st.textContent="★★★★★".slice(0,n)+"☆☆☆☆☆".slice(0,5-n);
+      var p=document.createElement("p");p.textContent=r.text;
+      c.appendChild(h);c.appendChild(st);c.appendChild(p);box.appendChild(c);
+    });
+    $("#avg").textContent="Средняя оценка: ★ "+(s/a.length).toFixed(1)+" (отзывов: "+a.length+")";
+  }).catch(function(){box.textContent="Не удалось загрузить отзывы. Попробуйте позже."});
+}
+function paint(){$$("#stars button").forEach(function(b,i){b.classList.toggle("on",i<rate)})}
+$$("#stars button").forEach(function(b,i){b.addEventListener("click",function(){rate=i+1;paint()})});
+function send(path,body,btn,ok){
+  if(!DB){toast("Отправка пока не подключена");return}
+  btn.disabled=true;body.ts={".sv":"timestamp"};
+  api(path,{method:"POST",body:JSON.stringify(body)}).then(function(){toast(ok);var r=btn.getBoundingClientRect();burst(r.left+r.width/2,r.top);ok=null;btn.disabled=false;btn.dispatchEvent(new CustomEvent("sent"))}).catch(function(){btn.disabled=false;toast("Не удалось отправить. Попробуйте позже")});
+}
+$("#rsend").addEventListener("click",function(){
+  var t=$("#rtext").value.trim();
+  if(!rate){toast("Выберите оценку");return}
+  if(t.length<3){toast("Напишите хотя бы пару слов");return}
+  send("/reviews",{name:($("#rname").value.trim()||"Аноним").slice(0,30),text:t.slice(0,400),rating:rate},this,"Спасибо за отзыв!");
+});
+$("#rsend").addEventListener("sent",function(){$("#rtext").value="";rate=0;paint();loadReviews()});
+$("#isend").addEventListener("click",function(){
+  var t=$("#itext").value.trim();
+  if(t.length<3){toast("Опишите идею хотя бы парой слов");return}
+  send("/ideas",{text:t.slice(0,600)},this,"Спасибо! Идея отправлена");
+});
+$("#isend").addEventListener("sent",function(){$("#itext").value=""});
+loadCounts();
+go(location.hash.slice(1)||"home",false);
+</script>
+</body>
+</html>
