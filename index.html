@@ -28,11 +28,11 @@ a{color:inherit}
 .g2{width:38vw;height:38vw;background:var(--b);bottom:-10vw;right:-8vw;animation-delay:-8s}
 @keyframes drift{to{transform:translate(6vw,5vw) scale(1.15)}}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
-.bar{max-width:1080px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:16px}
+.bar{max-width:1240px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:16px}
 .logo{display:flex;align-items:center;gap:10px;font:700 1.05rem Unbounded,sans-serif;text-decoration:none;margin-right:auto}
 .mark{width:36px;height:36px;border-radius:12px 12px 12px 4px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center;color:#fff;font-size:.8rem}
 nav{display:flex;gap:4px}
-nav button,.ic{font:500 .95rem Manrope,sans-serif;background:none;border:0;color:var(--mut);padding:9px 14px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+nav button,.ic{font:500 .9rem Manrope,sans-serif;background:none;border:0;color:var(--mut);padding:8px 11px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
 nav button:hover,.ic:hover{background:var(--bg2);color:var(--tx)}
 nav button[aria-current="page"]{background:var(--a);color:var(--on)}
 .ic{padding:9px 12px;font-size:1.1rem;line-height:1}
@@ -134,11 +134,16 @@ textarea.fld{min-height:110px;resize:vertical}
 .cnt{color:var(--mut);font-size:.88rem}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:26px}
 .card.form:hover{transform:none}
+.spec{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px;width:100%}
+.spec li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--bd);padding-bottom:6px;color:var(--mut);font-size:.93rem;text-align:left}
+.spec b{color:var(--tx);text-align:right}
+#lang{font-weight:700;font-size:.85rem}
+#fsearch{margin:6px 0 18px}
 @media (max-width:560px){.lead{grid-template-columns:1fr;text-align:center;justify-items:center}}
 @media (max-width:760px){
 .hero{grid-template-columns:1fr;min-height:0}.phone{margin:0 auto}
 }
-@media (max-width:940px){
+@media (max-width:1180px){
 #menu{display:block}
 nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--bd);padding:10px 16px}
 nav.open{display:flex}nav button{text-align:left}
@@ -154,10 +159,14 @@ nav.open{display:flex}nav button{text-align:left}
 <button data-go="home">Главная</button>
 <button data-go="download">Скачать мессенджер</button>
 <button data-go="guide">Инструкция</button>
+<button data-go="specs">Требования</button>
+<button data-go="faq">Вопросы</button>
 <button data-go="reviews">Отзывы</button>
 <button data-go="team">Создатели</button>
 </nav>
 <button class="ic" id="theme" aria-label="Сменить тему">🌓</button>
+<button class="ic" id="lang" aria-label="Язык">EN</button>
+<button class="ic" id="share" aria-label="Поделиться сайтом">🔗</button>
 <button class="ic" id="menu" aria-label="Открыть меню">☰</button>
 </div></header>
 
@@ -224,10 +233,32 @@ nav.open{display:flex}nav button{text-align:left}
 <li><b>Откройте файл.</b> Нажмите на скачанный APK в уведомлении или в папке «Загрузки» и выберите «Установить».</li>
 <li><b>Готово.</b> Запустите BleMessenger с главного экрана.</li>
 </ol></div>
-<h2 style="margin-top:40px">Частые вопросы</h2>
+<p style="margin-top:32px">Остались вопросы? Загляните в <a href="#faq" data-go="faq" style="color:var(--a);font-weight:700">раздел «Вопросы и ответы»</a>.</p>
+</section>
+
+<section class="page" id="specs">
+<h1>Системные требования</h1>
+<p>Что нужно, чтобы BleMessenger работал стабильно на вашем устройстве.</p>
+<div class="os">
+<div class="card"><span class="em">🪟</span><h3>Windows</h3><ul class="spec"><li><span>Система</span><b>Windows 10 или новее</b></li><li><span>Память</span><b>от 4 ГБ</b></li><li><span>Место</span><b>около 300 МБ</b></li><li><span>Сеть</span><b>Нужен интернет</b></li></ul></div>
+<div class="card"><span class="em">🐧</span><h3>Linux</h3><ul class="spec"><li><span>Система</span><b>Linux, 64-бит</b></li><li><span>Память</span><b>от 4 ГБ</b></li><li><span>Место</span><b>около 300 МБ</b></li><li><span>Сеть</span><b>Нужен интернет</b></li></ul></div>
+<div class="card"><span class="em">🤖</span><h3>Android</h3><ul class="spec"><li><span>Система</span><b>Android 8.0 или новее</b></li><li><span>Память</span><b>от 2 ГБ</b></li><li><span>Место</span><b>около 150 МБ</b></li><li><span>Сеть</span><b>Нужен интернет</b></li></ul></div>
+</div>
+<p>Значения примерные. Если мессенджер не запускается на вашем устройстве, напишите нам в Telegram.</p>
+</section>
+
+<section class="page" id="faq">
+<h1>Вопросы и ответы</h1>
+<input class="fld" id="fsearch" placeholder="Поиск по вопросам" aria-label="Поиск по вопросам">
+<div id="flist">
 <details><summary>Почему система предупреждает при установке?</summary><p>Приложение распространяется напрямую, а не через магазин, поэтому система просит подтвердить установку. Скачивайте файлы только с этого сайта и из нашего Telegram-канала.</p></details>
-<details><summary>Как обновить мессенджер?</summary><p>Скачайте новую версию на этой странице и установите поверх старой. О новых версиях мы пишем в Telegram.</p></details>
-<details><summary>Куда сообщить об ошибке или предложить идею?</summary><p>Напишите в наш Telegram-канал или оставьте комментарий на YouTube.</p></details>
+<details><summary>Как обновить мессенджер?</summary><p>Скачайте новую версию на странице загрузки и установите поверх старой. О новых версиях мы пишем в Telegram.</p></details>
+<details><summary>Файл не скачивается. Что делать?</summary><p>Попробуйте другой браузер или повторите позже. Если не помогает, напишите нам в Telegram.</p></details>
+<details><summary>Когда выйдет версия для Linux?</summary><p>Она скоро появится. Новости публикуем в Telegram-канале.</p></details>
+<details><summary>Куда сообщить об ошибке или предложить идею?</summary><p>Напишите в наш Telegram-канал или отправьте идею на вкладке «Отзывы».</p></details>
+<details><summary>Как узнавать о новых версиях?</summary><p>Подпишитесь на наш Telegram-канал и YouTube.</p></details>
+</div>
+<p id="fnone" hidden>Ничего не найдено</p>
 </section>
 
 <section class="page" id="reviews">
@@ -287,7 +318,7 @@ apk:"https://www.dropbox.com/scl/fi/c50gifo718o2xc3su8xb6/app-release.apk?rlkey=
 // Адрес базы Firebase Realtime Database для счётчика, отзывов и идей, например "https://имя-проекта-default-rtdb.firebaseio.com"
 var BACKEND={dbUrl:"https://blemessengerdownload-default-rtdb.firebaseio.com"};
 var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
-var PAGES=["home","download","guide","reviews","team"];
+var PAGES=["home","download","guide","specs","faq","reviews","team"];
 function toast(t){var e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove("on")},2600)}
 function go(p,push){
   if(PAGES.indexOf(p)<0)p="home";
@@ -297,7 +328,7 @@ function go(p,push){
   if(push!==false&&location.hash.slice(1)!==p)location.hash=p;
   window.scrollTo({top:0,behavior:"smooth"});
   if(p==="home")runChat();splitTitle(p);reveal(p);if(p==="reviews")loadReviews();
-  document.title=(p==="home"?"BleMessenger — скачать мессенджер":"BleMessenger — "+$("#"+p+" h1").textContent);
+  setTitle(p);
 }
 document.addEventListener("click",function(e){
   var g=e.target.closest("[data-go]");
@@ -337,7 +368,7 @@ function runChat(){
     timers.push(setTimeout(function(){var d=document.createElement("div");d.className="m "+m[0];d.textContent=m[1];c.appendChild(d)},t));t+=1100;
   });
 }
-function splitTitle(p){var h=$("#"+p+" h1");if(!h)return;var o=h.dataset.o||h.textContent;h.dataset.o=o;h.innerHTML="";var ws=o.split(" ");ws.forEach(function(w,i){var s=document.createElement("span");s.className="w";s.textContent=w;s.style.animationDelay=(i*0.07)+"s";h.appendChild(s);if(i<ws.length-1)h.appendChild(document.createTextNode(" "))})}
+function splitTitle(p){var h=$("#"+p+" h1");if(!h)return;var o=h.dataset.o||h.textContent;h.dataset.o=o;var sh=(lang==="en"&&EN.hasOwnProperty(o))?EN[o]:o;h.innerHTML="";var ws=sh.split(" ");ws.forEach(function(w,i){var s=document.createElement("span");s.className="w";s.textContent=w;s.style.animationDelay=(i*0.07)+"s";h.appendChild(s);if(i<ws.length-1)h.appendChild(document.createTextNode(" "))})}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("vis");io.unobserve(e.target)}})},{threshold:.1});
 function reveal(p){$$(".card, details, ol.steps li",$("#"+p)).forEach(function(el,i){el.classList.remove("vis");el.classList.add("rv");el.style.setProperty("--d",(i%4)*0.08+"s");io.observe(el)})}
 function burst(x,y){var els=[];for(var i=0;i<16;i++){var s=document.createElement("span");s.className="cf";var a=Math.random()*6.28,r=60+Math.random()*80;s.style.cssText="left:"+x+"px;top:"+y+"px;background:hsl("+(200+Math.random()*80)+" 90% 60%);--x:"+Math.cos(a)*r+"px;--y:"+(Math.sin(a)*r-30)+"px";document.body.appendChild(s);els.push(s)}setTimeout(function(){els.forEach(function(s){s.remove()})},950)}
@@ -397,8 +428,60 @@ $("#isend").addEventListener("click",function(){
 });
 $("#isend").addEventListener("sent",function(){$("#itext").value=""});
 $$("[data-dl]").forEach(function(b){if(!LINKS[b.dataset.dl]){b.textContent="Скоро"}});
+var lang='ru',EN={
+'Главная':'Home','Скачать мессенджер':'Download the messenger','Инструкция':'Guide','Требования':'Requirements','Вопросы':'FAQ','Отзывы':'Reviews','Создатели':'Creators',
+'Общайтесь легко, быстро и по-своему':'Chat easily, fast and your way',
+'BleMessenger — мессенджер, который мы делаем сами и развиваем вместе с вами. Скачайте его на Windows, Linux или Android за пару минут.':'BleMessenger is a messenger we build ourselves and grow together with you. Download it for Windows, Linux or Android in a couple of minutes.',
+'Наш Telegram-канал':'Our Telegram channel','Привет! Уже поставил BleMessenger?':'Hi! Did you install BleMessenger yet?','Да, скачал за минуту 🚀':'Yes, downloaded it in a minute 🚀','И как тебе?':'How do you like it?','Быстро, красиво, тёмная тема — огонь':'Fast, pretty, dark theme is fire',
+'Быстрый':'Fast','Сообщения приходят мгновенно, а приложение запускается без ожидания.':'Messages arrive instantly and the app starts without waiting.','Везде с вами':'Everywhere with you','Версии для Windows, Linux и Android — переписка всегда под рукой.':'Versions for Windows, Linux and Android keep your chats at hand.','Приятный на вид':'Nice to look at','Светлая и тёмная темы, плавные анимации и ничего лишнего.':'Light and dark themes, smooth animations and nothing extra.','Растёт вместе с вами':'Grows with you','Новости и обновления выходят в Telegram и на YouTube — предлагайте идеи.':'News and updates come out on Telegram and YouTube. Share your ideas.',
+'Выберите свою систему. Мы подсветили ту, что подходит вашему устройству.':'Choose your system. We highlighted the one that fits your device.','Всего скачиваний:':'Total downloads:','Установщик для Windows 10 и 11, версия 0.17.1':'Installer for Windows 10 and 11, version 0.17.1','Сборка для популярных дистрибутивов':'Build for popular distributions','APK-файл для телефона и планшета':'APK file for phone and tablet','Скачать для Windows':'Download for Windows','Скачать для Linux':'Download for Linux','Скачать APK':'Download APK','Скоро':'Soon','Для вашего устройства':'For your device','Не знаете, что делать после скачивания?':'Not sure what to do after downloading?','Откройте инструкцию':'Open the guide',
+'Как скачать и установить':'How to download and install','Выберите свою систему — шаги покажутся ниже.':'Choose your system and the steps will appear below.','Скачайте файл.':'Download the file.','На вкладке «Скачать мессенджер» нажмите «Скачать для Windows».':'On the “Download the messenger” tab, click “Download for Windows”.','Запустите установщик.':'Run the installer.','Откройте файл из папки «Загрузки». Если Windows покажет предупреждение, нажмите «Подробнее» и «Выполнить в любом случае».':'Open the file from your Downloads folder. If Windows shows a warning, click “More info” and “Run anyway”.','Следуйте подсказкам.':'Follow the prompts.','Выберите папку установки и дождитесь завершения.':'Choose an install folder and wait until it finishes.','Войдите в BleMessenger.':'Sign in to BleMessenger.','Ярлык появится на рабочем столе.':'A shortcut will appear on your desktop.','Скачайте файл':'Download the file','кнопкой «Скачать для Linux» и откройте терминал в папке с ним.':'with the “Download for Linux” button and open a terminal in its folder.','Разрешите запуск файла.':'Allow the file to run.','Имя файла может отличаться, подставьте своё.':'The file name may differ, use your own.','Запустите мессенджер.':'Start the messenger.','Копировать':'Copy','Скачайте APK':'Download the APK','кнопкой «Скачать APK» прямо с телефона.':'with the “Download APK” button right from your phone.','Разрешите установку.':'Allow installation.','В настройках включите «Установка из неизвестных источников» для вашего браузера.':'In settings, enable “Install unknown apps” for your browser.','Откройте файл.':'Open the file.','Нажмите на скачанный APK в уведомлении или в папке «Загрузки» и выберите «Установить».':'Tap the downloaded APK in the notification or the Downloads folder and choose “Install”.','Готово.':'Done.','Запустите BleMessenger с главного экрана.':'Launch BleMessenger from your home screen.','Остались вопросы? Загляните в':'Still have questions? Take a look at the','раздел «Вопросы и ответы»':'“Questions and answers” section',
+'Системные требования':'System requirements','Что нужно, чтобы BleMessenger работал стабильно на вашем устройстве.':'What you need for BleMessenger to run smoothly on your device.','Система':'System','Память':'Memory','Место':'Storage','Сеть':'Network','Windows 10 или новее':'Windows 10 or newer','Linux, 64-бит':'Linux, 64-bit','Android 8.0 или новее':'Android 8.0 or newer','от 4 ГБ':'from 4 GB','от 2 ГБ':'from 2 GB','около 300 МБ':'about 300 MB','около 150 МБ':'about 150 MB','Нужен интернет':'Internet required','Значения примерные. Если мессенджер не запускается на вашем устройстве, напишите нам в Telegram.':'Values are approximate. If the messenger does not run on your device, write to us on Telegram.',
+'Вопросы и ответы':'Questions and answers','Поиск по вопросам':'Search questions','Ничего не найдено':'Nothing found','Почему система предупреждает при установке?':'Why does the system show a warning during installation?','Приложение распространяется напрямую, а не через магазин, поэтому система просит подтвердить установку. Скачивайте файлы только с этого сайта и из нашего Telegram-канала.':'The app is distributed directly rather than through a store, so the system asks you to confirm the installation. Download files only from this site and our Telegram channel.','Как обновить мессенджер?':'How do I update the messenger?','Скачайте новую версию на странице загрузки и установите поверх старой. О новых версиях мы пишем в Telegram.':'Download the new version on the download page and install it over the old one. We announce new versions on Telegram.','Файл не скачивается. Что делать?':'The file won’t download. What should I do?','Попробуйте другой браузер или повторите позже. Если не помогает, напишите нам в Telegram.':'Try another browser or try again later. If that doesn’t help, write to us on Telegram.','Когда выйдет версия для Linux?':'When will the Linux version be out?','Она скоро появится. Новости публикуем в Telegram-канале.':'It will appear soon. We post news in the Telegram channel.','Куда сообщить об ошибке или предложить идею?':'Where can I report a bug or suggest an idea?','Напишите в наш Telegram-канал или отправьте идею на вкладке «Отзывы».':'Write to our Telegram channel or send an idea on the “Reviews” tab.','Как узнавать о новых версиях?':'How do I follow new versions?','Подпишитесь на наш Telegram-канал и YouTube.':'Subscribe to our Telegram channel and YouTube.',
+'Отзывы и предложения':'Reviews and suggestions','Расскажите, как вам BleMessenger, и подскажите, что в нём улучшить.':'Tell us what you think of BleMessenger and what to improve.','Оставить отзыв':'Leave a review','Предложить идею':'Suggest an idea','Напишите, какой функции не хватает в мессенджере.':'Tell us which feature the messenger is missing.','Отправить отзыв':'Send review','Отправить идею':'Send idea','Что пишут пользователи':'What users write','Ваше имя (можно пропустить)':'Your name (optional)','Что понравилось, а что нет?':'What did you like and what not?','Хочу, чтобы в BleMessenger появилось…':'I want BleMessenger to have…','Ваше имя':'Your name','Текст отзыва':'Review text','Ваша идея':'Your idea','Оценка':'Rating','Разделы':'Sections','Сменить тему':'Toggle theme','Открыть меню':'Open menu','Язык':'Language','Поделиться сайтом':'Share the site','Скачайте мессенджер BleMessenger':'Get the BleMessenger messenger',
+'Отзывы появятся здесь, когда сайт будет подключён к базе данных.':'Reviews will appear here once the site is connected to the database.','Пока нет отзывов. Станьте первым!':'No reviews yet. Be the first!','Не удалось загрузить отзывы. Попробуйте позже.':'Could not load reviews. Try again later.','Аноним':'Anonymous','Выберите оценку':'Choose a rating','Напишите хотя бы пару слов':'Write at least a few words','Спасибо за отзыв!':'Thanks for your review!','Опишите идею хотя бы парой слов':'Describe your idea in a few words','Спасибо! Идея отправлена':'Thanks! Idea sent','Не удалось отправить. Попробуйте позже':'Could not send. Try again later','Отправка пока не подключена':'Sending is not connected yet','Скопировано':'Copied','Не удалось скопировать':'Could not copy','Ссылка скопирована':'Link copied','Версия для Linux скоро появится. Следите за новостями в Telegram':'The Linux version is coming soon. Follow the news on Telegram','Файл скоро появится. Следите за новостями в Telegram':'The file is coming soon. Follow the news on Telegram',
+'Создатели и помощь в создании':'Creators and contributors','BleMessenger появился благодаря людям, которые вложили в него время и идеи.':'BleMessenger exists thanks to people who put their time and ideas into it.','👑 Главный создатель':'👑 Lead creator','Главный создатель BleMessenger — ведёт проект и развивает его вместе с командой.':'Lead creator of BleMessenger. Runs the project and grows it together with the team.','Помощь в создании':'Contributors','Помощь в создании мессенджера':'Helped build the messenger','Следите за проектом':'Follow the project','Новые версии, планы и закулисье — в наших соцсетях.':'New versions, plans and behind the scenes on our social networks.','TikTok — скоро':'TikTok coming soon','© 2026 BleMessenger. Сделано BlekMist, Studio и Suntsov_gera.':'© 2026 BleMessenger. Made by BlekMist, Studio and Suntsov_gera.'};
+function T(s){return lang==='en'&&EN.hasOwnProperty(s)?EN[s]:s}
+function tr(s){var k=s.trim();if(!k)return null;
+ if(EN.hasOwnProperty(k))return s.replace(k,EN[k]);
+ if(k.indexOf('Скачали: ')===0)return s.replace(k,'Downloads: '+k.slice(9));
+ if(k.indexOf('Средняя оценка:')===0)return s.replace(k,k.replace('Средняя оценка:','Average rating:').replace('(отзывов:','(reviews:'));
+ return null}
+function setNode(n){var base=n._o!==undefined?n._o:n.nodeValue;
+ if(lang==='en'){var r=tr(base);if(r!==null){n._o=base;if(n.nodeValue!==r)n.nodeValue=r}}
+ else if(n._o!==undefined){n.nodeValue=n._o;delete n._o}}
+function skipSet(n){var p=n.parentNode;if(!p||/^(SCRIPT|STYLE)$/.test(p.nodeName)||(p.closest&&p.closest('h1')))return;setNode(n)}
+function setTitle(p){var h=$('#'+p+' h1');document.title=p==='home'?(lang==='en'?'BleMessenger — download the messenger':'BleMessenger — скачать мессенджер'):'BleMessenger — '+(h?h.textContent:'')}
+function applyLang(l){
+ lang=l;document.documentElement.lang=l;
+ var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),n,list=[];
+ while((n=w.nextNode()))list.push(n);
+ list.forEach(skipSet);
+ $$('[placeholder],[aria-label]').forEach(function(e){['placeholder','aria-label'].forEach(function(a){var o=e['_'+a]||e.getAttribute(a);if(o===null||o===undefined)return;e['_'+a]=o;e.setAttribute(a,l==='en'&&EN.hasOwnProperty(o)?EN[o]:o)})});
+ $('#lang').textContent=l==='en'?'RU':'EN';
+ var cur=$('.page.on');if(cur){splitTitle(cur.id);setTitle(cur.id)}
+ loadCounts();if(cur&&cur.id==='reviews')loadReviews();
+}
+new MutationObserver(function(ms){
+ if(lang!=='en')return;
+ ms.forEach(function(m){
+  if(m.type==='characterData'){skipSet(m.target);return}
+  m.addedNodes.forEach(function(a){
+   if(a.nodeType===3){skipSet(a)}
+   else if(a.nodeType===1){var w=document.createTreeWalker(a,NodeFilter.SHOW_TEXT,null),n;while((n=w.nextNode()))skipSet(n)}
+  })
+ })
+}).observe(document.body,{childList:true,subtree:true,characterData:true});
+$('#lang').addEventListener('click',function(){var l=lang==='en'?'ru':'en';try{localStorage.setItem('ble-lang',l)}catch(e){}applyLang(l)});
+$('#share').addEventListener('click',function(){
+ var url=location.href,data={title:'BleMessenger',text:T('Скачайте мессенджер BleMessenger'),url:url};
+ function cp(){try{navigator.clipboard.writeText(url).then(function(){toast('Ссылка скопирована')},function(){toast('Не удалось скопировать')})}catch(e){toast('Не удалось скопировать')}}
+ if(navigator.share){navigator.share(data).catch(function(e){if(e&&e.name!=='AbortError')cp()})}else cp();
+});
+$('#fsearch').addEventListener('input',function(){var q=this.value.trim().toLowerCase(),c=0;$$('#flist details').forEach(function(d){var ok=!q||d.textContent.toLowerCase().indexOf(q)>-1;d.style.display=ok?'':'none';if(ok)c++});$('#fnone').hidden=c>0});
 loadCounts();
 go(location.hash.slice(1)||"home",false);
+try{if(localStorage.getItem('ble-lang')==='en')applyLang('en')}catch(e){}
 </script>
 </body>
 </html>
