@@ -30,7 +30,7 @@ a{color:inherit}
 .g2{width:38vw;height:38vw;background:var(--b);bottom:-10vw;right:-8vw;animation-delay:-8s}
 @keyframes drift{to{transform:translate(6vw,5vw) scale(1.15)}}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
-.bar{max-width:1400px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:16px}
+.bar{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:16px}
 .logo{display:flex;align-items:center;gap:10px;font:700 1.05rem Unbounded,sans-serif;text-decoration:none;margin-right:auto}
 .mark{width:36px;height:36px;border-radius:12px 12px 12px 4px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center;color:#fff;font-size:.8rem}
 nav{display:flex;gap:4px}
@@ -171,14 +171,22 @@ body{background-image:radial-gradient(color-mix(in srgb,var(--a) 16%,transparent
 .tcount{display:inline-flex;align-items:baseline;gap:12px;margin:8px 0 4px}
 .tcount b{font:700 3rem Unbounded,sans-serif;color:var(--a)}
 .tcount span{color:var(--mut);font-weight:500}
+.more{position:relative}
+.menu2{display:none;flex-direction:column;gap:2px;position:absolute;top:calc(100% + 8px);right:0;min-width:210px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:6px;box-shadow:0 20px 40px -20px #0008;z-index:50}
+.more.open .menu2{display:flex}
+.menu2 button{text-align:left}
+nav button.act{background:var(--bg2);color:var(--tx)}
+.gframe{background:#1a1030;border-radius:16px;overflow:hidden;margin:12px 0 16px}
+.gframe iframe{width:100%;height:170px;border:0;display:block}
 @media (max-width:560px){.lead{grid-template-columns:1fr;text-align:center;justify-items:center}}
 @media (max-width:760px){
 .hero{grid-template-columns:1fr;min-height:0}.phone{margin:0 auto}
 }
-@media (max-width:1440px){
+@media (max-width:1240px){
 #menu{display:block}
 nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--bd);padding:10px 16px}
 nav.open{display:flex}nav button{text-align:left}
+.more>#morebtn{display:none}.menu2{display:flex;position:static;border:0;box-shadow:none;background:none;padding:0;min-width:0}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition:none!important}.m,.typing{opacity:1;transform:none}}
 </style>
@@ -192,12 +200,15 @@ nav.open{display:flex}nav button{text-align:left}
 <button data-go="home">Главная</button>
 <button data-go="download">Скачать мессенджер</button>
 <button data-go="guide">Инструкция</button>
-<button data-go="specs">Требования</button>
-<button data-go="faq">Вопросы</button>
 <button data-go="beta">Бета-тест</button>
 <button data-go="reviews">Отзывы</button>
+<button data-go="donate">Поддержать</button>
+<div class="more"><button id="morebtn" aria-expanded="false">Ещё ▾</button><div class="menu2">
+<button data-go="specs">Требования</button>
+<button data-go="faq">Вопросы</button>
 <button data-go="team">Создатели</button>
 <button data-go="thanks">Благодарность</button>
+</div></div>
 </nav>
 <button class="ic" id="theme" aria-label="Сменить тему">🌓</button>
 <button class="ic" id="lang" aria-label="Язык">EN</button>
@@ -224,6 +235,7 @@ nav.open{display:flex}nav button{text-align:left}
 </div>
 </div>
 <div class="note"><span class="em">📦</span><div><h3>Пропали все медиа?</h3><p>Это дневной лимит сервера. Сообщения продолжают работать, а медиа вернутся в новый день.</p><button class="btn" data-go="beta">Подробнее</button></div></div>
+<div class="note"><span class="em">💜</span><div><h3>Сбор на новый сервер</h3><p>Помогите BleMessenger расти: любая сумма приближает нас к цели.</p><button class="btn pri" data-go="donate">Поддержать</button></div></div>
 <div class="grid">
 <div class="card"><span class="em">⚡</span><h3>Быстрый</h3><p>Сообщения приходят мгновенно, а приложение запускается без ожидания.</p></div>
 <div class="card"><span class="em">🖥️</span><h3>Везде с вами</h3><p>Версии для Windows, Linux и Android — переписка всегда под рукой.</p></div>
@@ -352,6 +364,26 @@ nav.open{display:flex}nav button{text-align:left}
 <span class="btn" aria-disabled="true">TikTok — скоро</span>
 </div>
 </section>
+<section class="page" id="donate">
+<h1>Поддержать проект</h1>
+<p>Мы собираем средства на новый сервер для BleMessenger. Любая сумма поможет проекту расти.</p>
+<div class="two">
+<div class="card form"><h3>Сбор на сервер</h3>
+<div class="gframe"><iframe src="https://www.donationalerts.com/widget/goal/10037668?token=wYhWNQP1nX0Brw9J1Tho" title="Шкала сбора на сервер" loading="lazy" referrerpolicy="no-referrer"></iframe></div>
+<div class="btns" style="margin-top:0"><a class="btn pri" href="https://www.donationalerts.com/r/blekmist__" target="_blank" rel="noopener">Поддержать на DonationAlerts</a><button class="btn" id="dcopy">Скопировать ссылку на донат</button></div>
+<p style="margin:14px 0 0;font-size:.85rem">Если шкала не отображается, <a href="https://www.donationalerts.com/widget/goal/10037668?token=wYhWNQP1nX0Brw9J1Tho" target="_blank" rel="noopener" style="color:var(--a);font-weight:700">откройте её в отдельной вкладке</a>.</p></div>
+<div><h2>Как отправить донат</h2>
+<ol class="steps">
+<li><b>Откройте страницу доната.</b> Нажмите «Поддержать на DonationAlerts».</li>
+<li><b>Выберите сумму.</b> Укажите, сколько хотите отправить.</li>
+<li><b>Описание не обязательно.</b> Можно оставить пустым или написать пару слов.</li>
+<li><b>Выберите сбор.</b> В списке сборов отметьте «На сервер BleMessenger».</li>
+<li><b>Завершите платёж.</b> Следуйте подсказкам на странице DonationAlerts.</li>
+</ol>
+<p style="margin-top:18px">Спасибо за поддержку!</p></div>
+</div>
+</section>
+
 <section class="page" id="thanks">
 <h1>Благодарность</h1>
 <p>Спасибо всем, кто принял участие в бета-тесте BleMessenger. Вы помогли сделать мессенджер лучше.</p>
@@ -382,13 +414,13 @@ apk:"https://www.dropbox.com/scl/fi/x5x5oajijh97qvnsr7zmy/app-release-2.apk?rlke
 // Адрес базы Firebase Realtime Database для счётчика, отзывов и идей, например "https://имя-проекта-default-rtdb.firebaseio.com"
 var BACKEND={dbUrl:"https://blemessengerdownload-default-rtdb.firebaseio.com"};
 var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
-var PAGES=["home","download","guide","specs","faq","beta","reviews","team","thanks"];
+var PAGES=["home","download","guide","specs","faq","beta","reviews","team","thanks","donate"];
 function toast(t){var e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove("on")},2600)}
 function go(p,push){
   if(PAGES.indexOf(p)<0)p="home";
   $$(".page").forEach(function(s){s.classList.toggle("on",s.id===p)});
   $$("nav button").forEach(function(b){b.dataset.go===p?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current")});
-  $("#nav").classList.remove("open");
+  $("#nav").classList.remove("open");$("#morebtn").classList.toggle("act",!!$(".menu2 [aria-current]"));
   if(push!==false&&location.hash.slice(1)!==p)location.hash=p;
   window.scrollTo({top:0,behavior:"smooth"});
   if(p==="home")runChat();splitTitle(p);reveal(p);if(p==="reviews")loadReviews();if(p==="thanks")renderThanks();
@@ -507,7 +539,8 @@ var lang='ru',EN={
 'Создатели и помощь в создании':'Creators and contributors','BleMessenger появился благодаря людям, которые вложили в него время и идеи.':'BleMessenger exists thanks to people who put their time and ideas into it.','👑 Главный создатель':'👑 Lead creator','Главный создатель BleMessenger — ведёт проект и развивает его вместе с командой.':'Lead creator of BleMessenger. Runs the project and grows it together with the team.','Помощь в создании':'Contributors','Помощь в создании мессенджера':'Helped build the messenger','Следите за проектом':'Follow the project','Новые версии, планы и закулисье — в наших соцсетях.':'New versions, plans and behind the scenes on our social networks.','TikTok — скоро':'TikTok coming soon','© 2026 BleMessenger. Сделано BlekMist, Studio и Suntsov_gera.':'© 2026 BleMessenger. Made by BlekMist, Studio and Suntsov_gera.',
 'Бета-тест уже идёт: Windows, Android и Web':'Beta test is on: Windows, Android and Web','Открыть Web-версию':'Open the Web version','Откройте мессенджер в браузере, без установки':'Open the messenger in your browser, no installation','Можно ли пользоваться без установки?':'Can I use it without installing?','Да. Откройте Web-версию на странице загрузки и пользуйтесь мессенджером прямо в браузере.':'Yes. Open the Web version on the download page and use the messenger right in your browser.',
 'Бета-тест':'Beta test','Бета-тест и известные особенности':'Beta test and known issues','BleMessenger сейчас в бета-тесте: мы ещё дорабатываем мессенджер, поэтому что-то может работать не идеально. Спасибо, что тестируете его вместе с нами.':'BleMessenger is in beta testing: we are still polishing the messenger, so something may not work perfectly. Thank you for testing it with us.','Лимит сервера':'Server limit','Пропали все медиа':'All media disappeared','Если у вас пропали все медиа, значит закончился дневной лимит сервера. Сообщения при этом продолжают работать.':'If all your media disappeared, the daily server limit has run out. Messages keep working in the meantime.','Медиа работают всегда. Нужно просто дождаться нового дня, когда лимит обнулится.':'Media always works. Just wait for the new day when the limit resets.','Пропали все медиа?':'All media gone?','Это дневной лимит сервера. Сообщения продолжают работать, а медиа вернутся в новый день.':'This is the daily server limit. Messages keep working and media returns on the new day.','Подробнее':'Learn more','Что такое бета-тест':'What is a beta test','Это пробная версия: мы проверяем мессенджер вместе с вами, поэтому возможны ошибки.':'This is a trial version: we test the messenger together with you, so bugs are possible.','Чем можно помочь':'How you can help','Пользуйтесь мессенджером и сообщайте о проблемах через форму ниже или на вкладке «Отзывы».':'Use the messenger and report problems with the form below or on the “Reviews” tab.','Что дальше':'What next','Исправления и новые функции выходят в обновлениях. Новости мы публикуем в Telegram-канале.':'Fixes and new features come in updates. We post news in the Telegram channel.','Нашли ошибку?':'Found a bug?','Опишите, что произошло, и на каком устройстве. Это поможет нам исправить быстрее.':'Describe what happened and on which device. It helps us fix it faster.','Устройство (например, Windows 11 или Android 14)':'Device (for example, Windows 11 or Android 14)','Что случилось?':'What happened?','Устройство':'Device','Описание ошибки':'Bug description','Отправить отчёт':'Send report','Спасибо! Отчёт отправлен':'Thanks! Report sent','Опишите проблему хотя бы парой слов':'Describe the problem in a few words','Идёт бета-тест BleMessenger.':'BleMessenger beta test is on.','Известные особенности':'Known issues','Закрыть':'Close','Наверх':'Back to top','Почему пропали все медиа?':'Why did all media disappear?','Скорее всего, закончился дневной лимит сервера. Сообщения продолжают работать, а медиа вернутся в новый день, когда лимит обнулится. Подробности на вкладке «Бета-тест».':'Most likely the daily server limit has run out. Messages keep working and media returns on the new day when the limit resets. See the “Beta test” tab for details.',
-'Благодарность':'Thanks','Спасибо всем, кто принял участие в бета-тесте BleMessenger. Вы помогли сделать мессенджер лучше.':'Thank you to everyone who took part in the BleMessenger beta test. You helped make the messenger better.','участников бета-теста':'beta testers','Бета-тестер':'Beta tester','Хотите помочь проекту?':'Want to help the project?','Скачайте бета-версию':'Download the beta version','и расскажите, что можно улучшить.':'and tell us what to improve.',};
+'Благодарность':'Thanks','Спасибо всем, кто принял участие в бета-тесте BleMessenger. Вы помогли сделать мессенджер лучше.':'Thank you to everyone who took part in the BleMessenger beta test. You helped make the messenger better.','участников бета-теста':'beta testers','Бета-тестер':'Beta tester','Хотите помочь проекту?':'Want to help the project?','Скачайте бета-версию':'Download the beta version','и расскажите, что можно улучшить.':'and tell us what to improve.',
+'Поддержать':'Support','Ещё ▾':'More ▾','Поддержать проект':'Support the project','Мы собираем средства на новый сервер для BleMessenger. Любая сумма поможет проекту расти.':'We are raising funds for a new BleMessenger server. Any amount helps the project grow.','Сбор на сервер':'Server fundraiser','Поддержать на DonationAlerts':'Support on DonationAlerts','Скопировать ссылку на донат':'Copy donation link','Если шкала не отображается,':'If the progress bar does not show,','откройте её в отдельной вкладке':'open it in a separate tab','Как отправить донат':'How to donate','Откройте страницу доната.':'Open the donation page.','Нажмите «Поддержать на DonationAlerts».':'Click “Support on DonationAlerts”.','Выберите сумму.':'Choose an amount.','Укажите, сколько хотите отправить.':'Enter how much you want to send.','Описание не обязательно.':'The description is optional.','Можно оставить пустым или написать пару слов.':'You can leave it empty or write a few words.','Выберите сбор.':'Choose the fundraiser.','В списке сборов отметьте «На сервер BleMessenger».':'In the list of fundraisers select “На сервер BleMessenger”.','Завершите платёж.':'Complete the payment.','Следуйте подсказкам на странице DonationAlerts.':'Follow the prompts on the DonationAlerts page.','Спасибо за поддержку!':'Thank you for your support!','Сбор на новый сервер':'Fundraiser for a new server','Помогите BleMessenger расти: любая сумма приближает нас к цели.':'Help BleMessenger grow: any amount brings us closer to the goal.',};
 function T(s){return lang==='en'&&EN.hasOwnProperty(s)?EN[s]:s}
 function tr(s){var k=s.trim();if(!k)return null;
  if(EN.hasOwnProperty(k))return s.replace(k,EN[k]);
@@ -554,6 +587,9 @@ var pg=$('#prog'),tp=$('#top');
 function onScroll(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;pg.style.width=(m>0?h.scrollTop/m*100:0)+'%';tp.classList.toggle('on',h.scrollTop>500)}
 window.addEventListener('scroll',onScroll,{passive:true});
 tp.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+$('#morebtn').addEventListener('click',function(e){e.stopPropagation();var o=this.parentNode.classList.toggle('open');this.setAttribute('aria-expanded',o)});
+document.addEventListener('click',function(){var m=$('.more');if(m)m.classList.remove('open')});
+$('#dcopy').addEventListener('click',function(){var u='https://www.donationalerts.com/r/blekmist__';try{navigator.clipboard.writeText(u).then(function(){toast('Скопировано')},function(){toast('Не удалось скопировать')})}catch(e){toast('Не удалось скопировать')}});
 var TESTERS=['Suntsov_gera','Studio','Vuvka','Andrey','Elinka','Tucstar','lst','обучаемый','Nekit67'];
 function renderThanks(){
  var g=$('#tgrid');g.textContent='';
