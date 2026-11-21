@@ -236,6 +236,60 @@ footer{font:400 .8rem var(--mono)}
 @keyframes pop3{from{opacity:0;transform:translateZ(0) translateY(8px) scale(.96)}to{opacity:1;transform:translateZ(28px)}}
 .bub{display:none}
 body::after{opacity:.85;height:70vh}
+/* liquid glass */
+:root{--g1:rgba(255,255,255,.7);--g2:rgba(255,255,255,.34);--gb:rgba(255,255,255,.85);--gs:rgba(90,60,170,.28);--hi:rgba(255,255,255,.9);--bg:#efeaff;--tx:#1b1235;--mut:#5d5688;--card:#fff;--bd:rgba(110,80,200,.22);--a:#7a3fe0;--b:#c98300}
+@media (prefers-color-scheme:dark){:root:not([data-theme='light']){--g1:rgba(255,255,255,.13);--g2:rgba(255,255,255,.04);--gb:rgba(255,255,255,.2);--gs:rgba(0,0,0,.55);--hi:rgba(255,255,255,.4);--bg:#0a0716;--tx:#f6f3ff;--mut:#bdb6dc;--card:#16112b;--bd:rgba(255,255,255,.14);--a:#b48cff;--b:#ffd25a}}
+:root[data-theme='dark']{--g1:rgba(255,255,255,.13);--g2:rgba(255,255,255,.04);--gb:rgba(255,255,255,.2);--gs:rgba(0,0,0,.55);--hi:rgba(255,255,255,.4);--bg:#0a0716;--tx:#f6f3ff;--mut:#bdb6dc;--card:#16112b;--bd:rgba(255,255,255,.14);--a:#b48cff;--b:#ffd25a}
+body{background-color:var(--bg);background-image:radial-gradient(55vw 55vh at 12% 8%,rgba(124,58,237,.3),transparent 62%),radial-gradient(50vw 50vh at 92% 18%,rgba(236,72,153,.2),transparent 60%),radial-gradient(60vw 60vh at 75% 105%,rgba(245,176,26,.2),transparent 60%),radial-gradient(50vw 50vh at 0% 95%,rgba(34,170,220,.16),transparent 60%);background-attachment:fixed;font-family:Manrope,system-ui,sans-serif}
+body::after{display:none}
+.glow{opacity:.2;filter:blur(80px)}
+.bub{display:block;border-radius:50%;opacity:.55;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.7),rgba(255,255,255,.1) 38%,transparent 70%),linear-gradient(135deg,rgba(124,58,237,.35),rgba(245,176,26,.25));border:1px solid rgba(255,255,255,.3);box-shadow:inset 0 0 18px rgba(255,255,255,.25),0 10px 30px -12px rgba(0,0,0,.4);backdrop-filter:blur(4px)}
+h1,h2,h3,.logo,nav button,.btn,.pill,.chip,.tcount b,.av,.ring>div,.bt,.ann,.tag,summary,.tabs button,#lang,footer{font-family:Manrope,system-ui,sans-serif}
+h1{font-size:clamp(2rem,5.2vw,3.6rem);font-weight:800;letter-spacing:-.04em;line-height:1.08}
+h2{font-weight:800;letter-spacing:-.03em;font-size:clamp(1.4rem,3.4vw,2rem)}
+h1::after{content:none}.page h2::before{content:none}.code::before{content:none}
+.logo{font-weight:800;letter-spacing:-.02em}.tcount b{font-weight:800}footer{font-size:.9rem}
+header,.card:not(.lead),.lead,.note,.phone,details,ol.steps li,.tabs,.menu2,.fld,.btn,.pill,#top{background:linear-gradient(135deg,var(--g1),var(--g2));border:1px solid var(--gb);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);box-shadow:0 14px 40px -16px var(--gs),inset 0 1px 0 var(--hi),inset 0 -1px 0 rgba(255,255,255,.06)}
+.note{background:linear-gradient(135deg,color-mix(in srgb,var(--b) 24%,var(--g1)),var(--g2))}
+.lead{background:linear-gradient(135deg,color-mix(in srgb,var(--a) 30%,var(--g1)),var(--g2))}
+.card,.note{border-radius:28px}.lead,.phone{border-radius:34px}
+.phone::before{border-radius:34px;background:linear-gradient(135deg,var(--g1),transparent);border:1px solid var(--gb)}
+.card:hover{border-color:var(--hi)}
+.card::before{background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.2),transparent 65%)}
+details,ol.steps li{border-radius:22px}
+header{margin:10px auto 0;width:calc(100% - 24px);max-width:1280px;top:calc(env(safe-area-inset-top,0px) + 8px);border-radius:28px}
+nav button{border-radius:999px;font-size:.88rem;font-weight:600;color:var(--mut)}
+nav button:hover{background:rgba(255,255,255,.14);color:var(--tx)}
+nav button[aria-current='page']{background:rgba(255,255,255,.2);color:var(--tx);box-shadow:inset 0 1px 0 var(--hi),0 6px 18px -8px var(--gs)}
+nav button.act{background:rgba(255,255,255,.14);color:var(--tx)}
+.menu2{border-radius:22px;-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%)}
+.ann{background:linear-gradient(90deg,rgba(124,58,237,.6),rgba(208,70,192,.5));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:0;color:#fff;box-shadow:none}
+.bt.v3{background:rgba(255,255,255,.1);border:1px solid var(--gb);color:var(--tx)}
+.btn{border-radius:999px;transition:transform .18s ease,box-shadow .18s ease,border-color .2s}
+.btn:hover{transform:translateY(-2px) scale(1.025);border-color:var(--hi);box-shadow:0 18px 40px -14px var(--gs),inset 0 1px 0 var(--hi)}
+.btn:active{transform:scale(.97);box-shadow:0 6px 18px -8px var(--gs),inset 0 1px 0 var(--hi)}
+.btn.pri{color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0) 52%),linear-gradient(135deg,#7a3fe0,#d046c0);background-size:auto;border:1px solid rgba(255,255,255,.4);animation:none;box-shadow:0 14px 34px -12px #9a3fe0,inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 6px rgba(0,0,0,.15)}
+.btn.pri:hover{box-shadow:0 18px 40px -12px #b03fe0,inset 0 1px 0 rgba(255,255,255,.75),inset 0 -2px 6px rgba(0,0,0,.15)}
+.btn.pri:active{transform:scale(.97);box-shadow:0 8px 20px -10px #9a3fe0,inset 0 1px 0 rgba(255,255,255,.5)}
+.btn[aria-disabled='true']{box-shadow:none}
+.tabs{border-radius:999px}.tabs button{border-radius:999px}
+.tabs button[aria-selected='true']{background:rgba(255,255,255,.25);color:var(--tx);box-shadow:inset 0 1px 0 var(--hi)}
+.fld{border-radius:18px;font:500 .95rem Manrope,sans-serif;color:var(--tx)}.fld::placeholder{color:var(--mut)}
+.m.i,.typing{background:rgba(255,255,255,.12);border:1px solid var(--gb)}
+.m.o{background:linear-gradient(135deg,#7a3fe0,#d046c0);color:#fff}
+.chip{background:rgba(255,255,255,.14);border:1px solid var(--gb)}
+.gframe{border-radius:20px}footer{border-top:1px solid var(--gb)}
+.code{background:var(--g2);border:1px solid var(--gb)}
+@media (max-width:1240px){nav{background:linear-gradient(135deg,var(--g1),var(--g2)),color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);border:1px solid var(--gb);border-radius:24px;margin-top:8px;box-shadow:0 20px 50px -20px var(--gs)}}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-top:26px}
+.fcard{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:34px;min-height:280px}
+.fcard::after{content:'';position:absolute;width:240px;height:240px;right:-70px;top:-70px;border-radius:50%;background:radial-gradient(circle,var(--c),transparent 70%);opacity:.55;filter:blur(10px);pointer-events:none}
+.fcard .big{font-size:3.6rem;line-height:1;display:block;animation:bob 4s ease-in-out infinite;filter:drop-shadow(0 12px 14px rgba(0,0,0,.35))}
+@keyframes bob{50%{transform:translateY(-10px) rotate(-5deg)}}
+.fcard h2{margin:6px 0 0}.fcard p{margin:0 0 8px}
+:root{--mut:#463e72}
+@media (prefers-color-scheme:dark){:root:not([data-theme='light']){--mut:#d6d0f2}}
+:root[data-theme='dark']{--mut:#d6d0f2}
 </style>
 </head>
 <body>
@@ -246,11 +300,12 @@ body::after{opacity:.85;height:70vh}
 <nav id="nav" aria-label="Разделы">
 <button data-go="home">Главная</button>
 <button data-go="download">Скачать мессенджер</button>
+<button data-go="new">Новинки</button>
 <button data-go="guide">Инструкция</button>
-<button data-go="beta">Бета-тест</button>
-<button data-go="reviews">Отзывы</button>
 <button data-go="donate">Поддержать</button>
 <div class="more"><button id="morebtn" aria-expanded="false">Ещё ▾</button><div class="menu2">
+<button data-go="beta">Бета-тест</button>
+<button data-go="reviews">Отзывы</button>
 <button data-go="specs">Требования</button>
 <button data-go="faq">Вопросы</button>
 <button data-go="team">Создатели</button>
@@ -267,7 +322,7 @@ body::after{opacity:.85;height:70vh}
 <section class="page" id="home">
 <div class="hero">
 <div>
-<button class="pill" data-go="download"><i></i>Сайт v3.0: новый дизайн. Бета-тест уже идёт</button>
+<button class="pill" data-go="new"><i></i>Новинки: BleMusic и NFT-подарки</button>
 <h1>Общайтесь легко, быстро и по-своему</h1>
 <p>BleMessenger — мессенджер, который мы делаем сами и развиваем вместе с вами. Скачайте его на Windows, Linux или Android за пару минут.</p>
 <div class="btns">
@@ -359,6 +414,16 @@ body::after{opacity:.85;height:70vh}
 <details><summary>Как узнавать о новых версиях?</summary><p>Подпишитесь на наш Telegram-канал и YouTube.</p></details>
 </div>
 <p id="fnone" hidden>Ничего не найдено</p>
+</section>
+
+<section class="page" id="new">
+<h1>Новинки</h1>
+<p>Свежие обновления BleMessenger в одном месте.</p>
+<div class="feat">
+<div class="card fcard" style="--c:#d046c0"><span class="big">🎵</span><span class="chip">Новинка</span><h2>BleMusic</h2><p>Мы выпускаем BleMusic. Подробное описание и инструкция скоро появятся здесь, а пока следите за новостями в Telegram.</p></div>
+<div class="card fcard" style="--c:#f5b01a"><span class="big">🎁</span><span class="chip">Новинка</span><h2>NFT-подарки</h2><p>Мы запускаем NFT-подарки. Подробное описание и инструкция скоро появятся здесь, а пока следите за новостями в Telegram.</p></div>
+</div>
+<div class="btns"><a class="btn pri" href="https://t.me/BleMessenger" target="_blank" rel="noopener">Новости в Telegram</a><button class="btn" data-go="reviews">Предложить идею</button></div>
 </section>
 
 <section class="page" id="beta">
@@ -462,7 +527,7 @@ apk:"https://www.dropbox.com/scl/fi/x5x5oajijh97qvnsr7zmy/app-release-2.apk?rlke
 // Адрес базы Firebase Realtime Database для счётчика, отзывов и идей, например "https://имя-проекта-default-rtdb.firebaseio.com"
 var BACKEND={dbUrl:"https://blemessengerdownload-default-rtdb.firebaseio.com"};
 var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
-var PAGES=["home","download","guide","specs","faq","beta","reviews","team","thanks","donate"];
+var PAGES=["home","download","new","guide","specs","faq","beta","reviews","team","thanks","donate"];
 function toast(t){var e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove("on")},2600)}
 function go(p,push){
   if(PAGES.indexOf(p)<0)p="home";
@@ -585,7 +650,7 @@ var lang='ru',EN={
 'Отзывы и предложения':'Reviews and suggestions','Расскажите, как вам BleMessenger, и подскажите, что в нём улучшить.':'Tell us what you think of BleMessenger and what to improve.','Оставить отзыв':'Leave a review','Предложить идею':'Suggest an idea','Напишите, какой функции не хватает в мессенджере.':'Tell us which feature the messenger is missing.','Отправить отзыв':'Send review','Отправить идею':'Send idea','Что пишут пользователи':'What users write','Ваше имя (можно пропустить)':'Your name (optional)','Что понравилось, а что нет?':'What did you like and what not?','Хочу, чтобы в BleMessenger появилось…':'I want BleMessenger to have…','Ваше имя':'Your name','Текст отзыва':'Review text','Ваша идея':'Your idea','Оценка':'Rating','Разделы':'Sections','Сменить тему':'Toggle theme','Открыть меню':'Open menu','Язык':'Language','Поделиться сайтом':'Share the site','Скачайте мессенджер BleMessenger':'Get the BleMessenger messenger',
 'Отзывы появятся здесь, когда сайт будет подключён к базе данных.':'Reviews will appear here once the site is connected to the database.','Пока нет отзывов. Станьте первым!':'No reviews yet. Be the first!','Не удалось загрузить отзывы. Попробуйте позже.':'Could not load reviews. Try again later.','Аноним':'Anonymous','Выберите оценку':'Choose a rating','Напишите хотя бы пару слов':'Write at least a few words','Спасибо за отзыв!':'Thanks for your review!','Опишите идею хотя бы парой слов':'Describe your idea in a few words','Спасибо! Идея отправлена':'Thanks! Idea sent','Не удалось отправить. Попробуйте позже':'Could not send. Try again later','Отправка пока не подключена':'Sending is not connected yet','Скопировано':'Copied','Не удалось скопировать':'Could not copy','Ссылка скопирована':'Link copied','Версия для Linux скоро появится. Следите за новостями в Telegram':'The Linux version is coming soon. Follow the news on Telegram','Файл скоро появится. Следите за новостями в Telegram':'The file is coming soon. Follow the news on Telegram',
 'Создатели и помощь в создании':'Creators and contributors','BleMessenger появился благодаря людям, которые вложили в него время и идеи.':'BleMessenger exists thanks to people who put their time and ideas into it.','👑 Главный создатель':'👑 Lead creator','Главный создатель BleMessenger — ведёт проект и развивает его вместе с командой.':'Lead creator of BleMessenger. Runs the project and grows it together with the team.','Помощь в создании':'Contributors','Помощь в создании мессенджера':'Helped build the messenger','Следите за проектом':'Follow the project','Новые версии, планы и закулисье — в наших соцсетях.':'New versions, plans and behind the scenes on our social networks.','TikTok — скоро':'TikTok coming soon','© 2026 BleMessenger. Сделано BlekMist, Studio и Suntsov_gera.':'© 2026 BleMessenger. Made by BlekMist, Studio and Suntsov_gera.',
-'Сайт v3.0: новый дизайн. Бета-тест уже идёт':'Site v3.0: new design. The beta test is on','Версия сайта 3.0':'Site version 3.0','Открыть Web-версию':'Open the Web version','Откройте мессенджер в браузере, без установки':'Open the messenger in your browser, no installation','Можно ли пользоваться без установки?':'Can I use it without installing?','Да. Откройте Web-версию на странице загрузки и пользуйтесь мессенджером прямо в браузере.':'Yes. Open the Web version on the download page and use the messenger right in your browser.',
+'Новинки: BleMusic и NFT-подарки':'New: BleMusic and NFT gifts','Новинки':'New','Новинка':'New','NFT-подарки':'NFT gifts','Свежие обновления BleMessenger в одном месте.':'Fresh BleMessenger updates in one place.','Мы выпускаем BleMusic. Подробное описание и инструкция скоро появятся здесь, а пока следите за новостями в Telegram.':'We are releasing BleMusic. A detailed description and guide will appear here soon; meanwhile follow the news on Telegram.','Мы запускаем NFT-подарки. Подробное описание и инструкция скоро появятся здесь, а пока следите за новостями в Telegram.':'We are launching NFT gifts. A detailed description and guide will appear here soon; meanwhile follow the news on Telegram.','Новости в Telegram':'News on Telegram','Версия сайта 3.0':'Site version 3.0','Открыть Web-версию':'Open the Web version','Откройте мессенджер в браузере, без установки':'Open the messenger in your browser, no installation','Можно ли пользоваться без установки?':'Can I use it without installing?','Да. Откройте Web-версию на странице загрузки и пользуйтесь мессенджером прямо в браузере.':'Yes. Open the Web version on the download page and use the messenger right in your browser.',
 'Бета-тест':'Beta test','Бета-тест и известные особенности':'Beta test and known issues','BleMessenger сейчас в бета-тесте: мы ещё дорабатываем мессенджер, поэтому что-то может работать не идеально. Спасибо, что тестируете его вместе с нами.':'BleMessenger is in beta testing: we are still polishing the messenger, so something may not work perfectly. Thank you for testing it with us.','Лимит сервера':'Server limit','Пропали все медиа':'All media disappeared','Если у вас пропали все медиа, значит закончился дневной лимит сервера. Сообщения при этом продолжают работать.':'If all your media disappeared, the daily server limit has run out. Messages keep working in the meantime.','Медиа работают всегда. Нужно просто дождаться нового дня, когда лимит обнулится.':'Media always works. Just wait for the new day when the limit resets.','Пропали все медиа?':'All media gone?','Это дневной лимит сервера. Сообщения продолжают работать, а медиа вернутся в новый день.':'This is the daily server limit. Messages keep working and media returns on the new day.','Подробнее':'Learn more','Что такое бета-тест':'What is a beta test','Это пробная версия: мы проверяем мессенджер вместе с вами, поэтому возможны ошибки.':'This is a trial version: we test the messenger together with you, so bugs are possible.','Чем можно помочь':'How you can help','Пользуйтесь мессенджером и сообщайте о проблемах через форму ниже или на вкладке «Отзывы».':'Use the messenger and report problems with the form below or on the “Reviews” tab.','Что дальше':'What next','Исправления и новые функции выходят в обновлениях. Новости мы публикуем в Telegram-канале.':'Fixes and new features come in updates. We post news in the Telegram channel.','Нашли ошибку?':'Found a bug?','Опишите, что произошло, и на каком устройстве. Это поможет нам исправить быстрее.':'Describe what happened and on which device. It helps us fix it faster.','Устройство (например, Windows 11 или Android 14)':'Device (for example, Windows 11 or Android 14)','Что случилось?':'What happened?','Устройство':'Device','Описание ошибки':'Bug description','Отправить отчёт':'Send report','Спасибо! Отчёт отправлен':'Thanks! Report sent','Опишите проблему хотя бы парой слов':'Describe the problem in a few words','Идёт бета-тест BleMessenger.':'BleMessenger beta test is on.','Известные особенности':'Known issues','Закрыть':'Close','Наверх':'Back to top','Почему пропали все медиа?':'Why did all media disappear?','Скорее всего, закончился дневной лимит сервера. Сообщения продолжают работать, а медиа вернутся в новый день, когда лимит обнулится. Подробности на вкладке «Бета-тест».':'Most likely the daily server limit has run out. Messages keep working and media returns on the new day when the limit resets. See the “Beta test” tab for details.',
 'Благодарность':'Thanks','Спасибо всем, кто принял участие в бета-тесте BleMessenger. Вы помогли сделать мессенджер лучше.':'Thank you to everyone who took part in the BleMessenger beta test. You helped make the messenger better.','участников бета-теста':'beta testers','Бета-тестер':'Beta tester','Хотите помочь проекту?':'Want to help the project?','Скачайте бета-версию':'Download the beta version','и расскажите, что можно улучшить.':'and tell us what to improve.',
 'Поддержать':'Support','Ещё ▾':'More ▾','Поддержать проект':'Support the project','Мы собираем средства на новый сервер для BleMessenger. Любая сумма поможет проекту расти.':'We are raising funds for a new BleMessenger server. Any amount helps the project grow.','Сбор на сервер':'Server fundraiser','Поддержать на DonationAlerts':'Support on DonationAlerts','Скопировать ссылку на донат':'Copy donation link','Если шкала не отображается,':'If the progress bar does not show,','откройте её в отдельной вкладке':'open it in a separate tab','Как отправить донат':'How to donate','Откройте страницу доната.':'Open the donation page.','Нажмите «Поддержать на DonationAlerts».':'Click “Support on DonationAlerts”.','Выберите сумму.':'Choose an amount.','Укажите, сколько хотите отправить.':'Enter how much you want to send.','Описание не обязательно.':'The description is optional.','Можно оставить пустым или написать пару слов.':'You can leave it empty or write a few words.','Выберите сбор.':'Choose the fundraiser.','В списке сборов отметьте «На сервер BleMessenger».':'In the list of fundraisers select “На сервер BleMessenger”.','Завершите платёж.':'Complete the payment.','Следуйте подсказкам на странице DonationAlerts.':'Follow the prompts on the DonationAlerts page.','Спасибо за поддержку!':'Thank you for your support!','Сбор на новый сервер':'Fundraiser for a new server','Помогите BleMessenger расти: любая сумма приближает нас к цели.':'Help BleMessenger grow: any amount brings us closer to the goal.',};
